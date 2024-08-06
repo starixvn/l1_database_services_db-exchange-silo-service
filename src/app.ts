@@ -1,7 +1,7 @@
 import type { BaseLogger } from "@ldb/base-logger";
-import type { Scheduler } from "@ldb/scheduler";
 import { name, version } from "./metadata.js";
 import type { ExchangeUpdater } from "./modules/exchange-updater.js";
+import type { Scheduler } from "./types/scheduler.js";
 
 let exiting = false;
 
@@ -53,7 +53,8 @@ export class App {
 
     async initiate() {
         this.exchangeUpdater.subscribe(this.scheduler);
-
         this.logger.logWarning({ title: `${name}@${version}`, message: "App has been started." });
+
+        this.scheduler.emit("SYNC");
     }
 }
