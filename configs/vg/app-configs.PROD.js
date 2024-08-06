@@ -1,0 +1,67 @@
+/** @typedef {import("@ldb/base-logger").SeverityLevel} SeverityLevel */
+/** @typedef {import("@ldb/sentry-logger").NodeOptions} NodeOptions */
+/** @typedef {import("@ldb/sentry-logger").SentryOptions} SentryOptions */
+/** @typedef {import("@ldb/skynex-logger").SkynexOptions} SkynexOptions */
+
+import { name, version } from "./metadata.js";
+
+export const environment = "SG-PROD";
+export const healthcheckPort = 5000;
+
+/** @type {SeverityLevel} */
+export const sentrySeverityLevel = "warning";
+/** @type {NodeOptions} */
+export const sentryNodeOptions = {
+    dsn: "http://bb368dd4964d4f28bdeec2494d4742bf@10.2.189.50:9009/169",
+    environment,
+    initialScope: {
+        tags: { service: name },
+    },
+    release: `${name}@${version}`,
+};
+/** @type {SentryOptions} */
+export const sentryOptions = {};
+
+/** @type {SeverityLevel} */
+export const skynexSeverityLevel = "warning";
+/** @type {SkynexOptions} */
+export const skynexOptions = {
+    conversationIds: {
+        telegram: -1001948416210,
+        teams: "19:4cc06ce67599405ead9238b3408147f7@thread.tacv2",
+    },
+    proxy: {
+        protocol: "http",
+        host: "lisasqd.nebula.prod",
+        port: 8801,
+    },
+};
+
+/** @type {SeverityLevel} */
+export const terminalSeverityLevel = "log";
+
+const mongoCred = "lmn_summary:%58%45%3f%33%63%45%68%26%74%58%4d%63%60%47%59%5e%76%65%75%6a%24%4e%2b%72%62%7e%33%53%35%74%6f%44";
+const mongoSrv = "10.99.99.53:39210,10.99.99.54:39210,10.99.99.188:39210,10.99.99.187:39210";
+const mongoRepl = "L2_SabaMain";
+
+export const database = {
+    mongoURI: `mongodb://${mongoCred}@${mongoSrv}/admin?authSource=admin&appName=${encodeURIComponent(name)}&replicaSet=${mongoRepl}`,
+    mssqlConfig: {
+        server: "10.99.99.188",
+        port: 1433,
+        database: "SabaWH",
+        user: "exchange_silo",
+        password: "?&fPzXqB@E!~V51w+II2=Eb^npLd.ecS",
+        parseJSON: true,
+        pool: { min: 1, max: 5, idleTimeoutMillis: 120_000 },
+        options: {
+            encrypt: true,
+            trustServerCertificate: true,
+            appName: `${name}@${version}`,
+        },
+    },
+};
+
+export const eventConfigs = {
+    SYNC: [3_600_000, 0],
+};

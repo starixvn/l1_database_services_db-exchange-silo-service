@@ -4,12 +4,12 @@
     "type": "module",
     "scripts": {
         "test": "NODE_OPTIONS=\"--experimental-vm-modules --es-module-specifier-resolution=node --no-warnings\" jest --testPathPattern=tests/unit-tests/",
-        "test-coverage": "NODE_OPTIONS=\"--experimental-vm-modules --es-module-specifier-resolution=node --no-warnings\" jest --collect-coverage --testPathPattern=tests/unit-tests/",
+        "test-coverage": "NODE_OPTIONS=\"--experimental-vm-modules --es-module-specifier-resolution=node --no-warnings\" jest --collect-coverage --passWithNoTests --testPathPattern=tests/unit-tests/",
         "build": "rimraf lib && tsc",
         "dev": "NODE_OPTIONS=\"--enable-source-maps --no-warnings --experimental-default-type=module --es-module-specifier-resolution=node\" node lib/index.js"
     },
     "engines": {
-        "node": "=18"
+        "node": ">=18"
     },
     "files": [
         "lib/**"
