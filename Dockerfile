@@ -1,4 +1,4 @@
-FROM hub.lumigame.com/docker-hub/library/node:20-alpine AS base
+FROM hub.lumigame.com/docker-hub/library/node:lts-alpine AS base
 RUN apk upgrade \
  && npm upgrade --latest --global npm pnpm \
  && rm -rf /var/cache/apk/* \
