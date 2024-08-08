@@ -58,5 +58,5 @@ export const database = {
 };
 
 export const eventConfigs = {
-    SYNC: [3_600_000, 0],
+    SYNC: [3_600_000, 60_000],
 };
