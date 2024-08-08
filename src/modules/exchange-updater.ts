@@ -71,6 +71,10 @@ export class ExchangeUpdater extends Subscriber<SchedulerKeys, SchedulerEvents, 
     }
 
     async updateExchange(data: ExchangeSilo[]) {
+        if (data.length === 0) {
+            return;
+        }
+
         const bulkPipe = data.map(convertExchangeDataToBulkWrite);
         const { matchedCount, modifiedCount, upsertedCount } = await this.exchangeSilos.bulkWrite(bulkPipe, { ordered: false });
         this.logger.logDebug({ title: `${this.className}.updateExchange`, message: `#=${matchedCount}  I+${upsertedCount}  M=${modifiedCount}` });
