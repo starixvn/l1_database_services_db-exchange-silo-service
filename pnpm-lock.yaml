@@ -15,8 +15,8 @@ importers:
         specifier: 6.8.0
         version: 6.8.0
       '@ldb/scheduler':
-        specifier: 2.0.0
-        version: 2.0.0(@mongodb-js/zstd@1.2.0)
+        specifier: 3.0.1
+        version: 3.0.1
       '@ldb/sentry-logger':
         specifier: 1.0.0
         version: 1.0.0
@@ -26,6 +26,9 @@ importers:
       '@ldb/terminal-logger':
         specifier: 1.0.0
         version: 1.0.0
+      '@ldb/types':
+        specifier: 1.1.0
+        version: 1.1.0
       awilix:
         specifier: 10.0.2
         version: 10.0.2
@@ -45,9 +48,6 @@ importers:
       '@ldb/base-logger':
         specifier: 1.0.0
         version: 1.0.0
-      '@ldb/types':
-        specifier: ^1.0.5
-        version: 1.0.5(@mongodb-js/zstd@1.2.0)
       '@tsconfig/node20':
         specifier: 20.1.4
         version: 20.1.4
@@ -543,8 +543,8 @@ packages:
   '@ldb/mongo@6.8.0':
     resolution: {integrity: sha512-gPuub0rBqkPlVvYXRiKwsAEG4oByBp9y3heEUn94L9IVkCXVlF0by4UKmtePREQ2AgmY/vZ8j7cx//giEzYSFw==}
 
-  '@ldb/scheduler@2.0.0':
-    resolution: {integrity: sha512-ajFJ8apPb/UXFYWdWcGKk05NenZRgjzHaXg4pnYqQWIeetjGAqUjqu0FvOZ0u0YbLk4SGT7G4AP7JOZTolGLYg==}
+  '@ldb/scheduler@3.0.1':
+    resolution: {integrity: sha512-dTmdodtkyK3PQoG40BBhjUkQGePQa/OJnBjSgsTAg5emQwtcmDtd94UAyYPGs9oIo/NiEK9IIElMknImM1Pwaw==}
 
   '@ldb/sentry-logger@1.0.0':
     resolution: {integrity: sha512-VeLvG9M4gLBie95pLoWyicafGgikYAg9ehyo+fp6VDlj40OU4BR5GfnXKt8nBMBmKh7yehQ3RgVQ1kV4rYDFCg==}
@@ -555,8 +555,8 @@ packages:
   '@ldb/terminal-logger@1.0.0':
     resolution: {integrity: sha512-lFbFMj4fLa6tRzU1RcrWxuJ6gFwe16i92G3esYzGY1VzXlwmPza9LOx/LC+3w5mqEMI8LnFlLIl28wp2E/Usvg==}
 
-  '@ldb/types@1.0.5':
-    resolution: {integrity: sha512-58vGtGfcQWrUZkR7HxjYnpbtecBKbm8V4rCv7mhQsr3dnkrMjJlrX7I7ByqOAknCWd2tcPetMNW9EWQU2oalKw==}
+  '@ldb/types@1.1.0':
+    resolution: {integrity: sha512-QaeRJYdv87aoscCdZBC4M2/OdpFWrYsh0y2fWYqROVnxrVwrPQT6NJW9WjCgrTYGa3ly0P/tW8nOTQUVuchLWA==}
 
   '@ldb/utils@0.2.0':
     resolution: {integrity: sha512-dQwKu6fs1iqXNgMpA6oMDAaqiXgXpe8DOJ0gbBNNCXicn8f3KhkOb8DiYtnYtzWY46q/Pq/8WRnnMplB/oOamg==}
@@ -3275,18 +3275,10 @@ snapshots:
       - snappy
       - socks
 
-  '@ldb/scheduler@2.0.0(@mongodb-js/zstd@1.2.0)':
+  '@ldb/scheduler@3.0.1':
     dependencies:
-      '@ldb/types': 1.0.5(@mongodb-js/zstd@1.2.0)
+      '@ldb/types': 1.1.0
       '@ldb/utils': 0.2.0
-    transitivePeerDependencies:
-      - '@aws-sdk/credential-providers'
-      - '@mongodb-js/zstd'
-      - gcp-metadata
-      - kerberos
-      - mongodb-client-encryption
-      - snappy
-      - socks
 
   '@ldb/sentry-logger@1.0.0':
     dependencies:
@@ -3312,17 +3304,7 @@ snapshots:
       '@ldb/base-logger': 1.0.0
       '@ldb/logger-utils': 1.0.0
 
-  '@ldb/types@1.0.5(@mongodb-js/zstd@1.2.0)':
-    dependencies:
-      mongodb: 6.8.0(@mongodb-js/zstd@1.2.0)
-    transitivePeerDependencies:
-      - '@aws-sdk/credential-providers'
-      - '@mongodb-js/zstd'
-      - gcp-metadata
-      - kerberos
-      - mongodb-client-encryption
-      - snappy
-      - socks
+  '@ldb/types@1.1.0': {}
 
   '@ldb/utils@0.2.0': {}
 

@@ -17,10 +17,11 @@
     "dependencies": {
         "@ldb/logger": "1.0.0",
         "@ldb/mongo": "6.8.0",
-        "@ldb/scheduler": "2.0.0",
+        "@ldb/scheduler": "3.0.1",
         "@ldb/sentry-logger": "1.0.0",
         "@ldb/skynex-logger": "1.0.0",
         "@ldb/terminal-logger": "1.0.0",
+        "@ldb/types": "1.1.0",
         "awilix": "10.0.2",
         "mssql": "11.0.0"
     },
@@ -29,7 +30,6 @@
         "@commitlint/config-conventional": "19.2.2",
         "@jest/globals": "29.7.0",
         "@ldb/base-logger": "1.0.0",
-        "@ldb/types": "^1.0.5",
         "@tsconfig/node20": "20.1.4",
         "@types/jest": "29.5.12",
         "@types/mssql": "9.1.5",

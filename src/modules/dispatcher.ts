@@ -1,5 +1,5 @@
 import type { BaseLogger } from "@ldb/base-logger";
-import { EventsDescription, GenericListener, TypedEventEmitter } from "@ldb/types";
+import { TypedEventEmitter, type EventsDescription, type GenericListener } from "@ldb/types";
 
 export class Dispatcher<
     EventDescs extends EventsDescription,
