@@ -1,6 +1,6 @@
 import js from "@eslint/js";
 import typescriptEslint from "@typescript-eslint/eslint-plugin";
-import tsParser from "@typescript-eslint/parser";
+import parser from "@typescript-eslint/parser";
 import google from "eslint-config-google";
 import prettier from "eslint-plugin-prettier/recommended";
 import pluginSecurity from "eslint-plugin-security";
@@ -18,13 +18,11 @@ export default ts.config(
     {
         plugins: { "@typescript-eslint": typescriptEslint },
         languageOptions: {
-            parser: tsParser,
-            ecmaVersion: 5,
-            sourceType: "script",
+            parser,
             parserOptions: {
                 project: "tsconfig.json",
             },
         },
     },
-    { ignores: ["/*", "!/src"] }
+    { ignores: ["*", "!src"] },
 );
