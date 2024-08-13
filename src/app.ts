@@ -8,7 +8,11 @@ let exiting = false;
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export class App {
-    constructor(private readonly scheduler: Scheduler, private readonly exchangeUpdater: ExchangeUpdater, private readonly logger: BaseLogger) {
+    constructor(
+        private readonly scheduler: Scheduler,
+        private readonly exchangeUpdater: ExchangeUpdater,
+        private readonly logger: BaseLogger,
+    ) {
         this.selfBound();
         this.handleExceptions();
     }

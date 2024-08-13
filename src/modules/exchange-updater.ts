@@ -22,7 +22,7 @@ export class ExchangeUpdater extends Subscriber<SchedulerKey, SchedulerEvents> {
         private readonly exchangeSourceDB: mssql.ConnectionPool,
         private readonly exchangeSilos: Collection,
         private readonly getExchangeSP: string,
-        logger: BaseLogger
+        logger: BaseLogger,
     ) {
         super(logger);
         this.selfBound();
