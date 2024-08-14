@@ -5,7 +5,7 @@
 
 import { name, version } from "./metadata.js";
 
-export const environment = "SG-UAT";
+export const environment = "VG-UAT";
 export const healthcheckPort = 5000;
 
 /** @type {SeverityLevel} */

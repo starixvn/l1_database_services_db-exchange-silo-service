@@ -5,7 +5,7 @@
 
 import { name, version } from "./metadata.js";
 
-export const environment = "SG-PROD";
+export const environment = "VG-PROD";
 export const healthcheckPort = 5000;
 
 /** @type {SeverityLevel} */
