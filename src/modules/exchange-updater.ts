@@ -3,7 +3,7 @@ import type { BaseLogger } from "@ldb/base-logger";
 import type { AnyBulkWriteOperation, Collection } from "@ldb/mongo";
 import mssql from "mssql";
 import type { ExchangeCodes, ExchangeConfigSchema, ExchangeSilo } from "../types/exchanges.js";
-import type { Scheduler, SchedulerEvents, SchedulerKeys } from "../types/scheduler.js";
+import type { Scheduler, SchedulerEvents, SchedulerKey } from "../types/scheduler.js";
 import { Subscriber } from "./subscriber.js";
 
 const convertExchangeDataToBulkWrite = ({ time, code, USD, VND }: ExchangeSilo): AnyBulkWriteOperation => ({
@@ -14,7 +14,7 @@ const convertExchangeDataToBulkWrite = ({ time, code, USD, VND }: ExchangeSilo):
     },
 });
 
-export class ExchangeUpdater extends Subscriber<SchedulerKeys, SchedulerEvents, Scheduler> {
+export class ExchangeUpdater extends Subscriber<SchedulerKey, SchedulerEvents> {
     startTime: Date | null = null;
 
     constructor(
@@ -22,7 +22,7 @@ export class ExchangeUpdater extends Subscriber<SchedulerKeys, SchedulerEvents, 
         private readonly exchangeSourceDB: mssql.ConnectionPool,
         private readonly exchangeSilos: Collection,
         private readonly getExchangeSP: string,
-        logger: BaseLogger
+        logger: BaseLogger,
     ) {
         super(logger);
         this.selfBound();

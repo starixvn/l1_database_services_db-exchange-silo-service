@@ -62,6 +62,6 @@ export const database = {
     },
 };
 
-export const eventConfigs = {
+export const schedulerConfig = {
     SYNC: [3_600_000, 2_460_000],
 };

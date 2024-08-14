@@ -8,8 +8,8 @@ import { asClass, asValue, createContainer, InjectionMode, type AwilixContainer,
 import mssql from "mssql";
 import {
     environment,
-    eventConfigs,
     healthcheckPort,
+    schedulerConfig,
     sentryNodeOptions,
     sentryOptions,
     sentrySeverityLevel,
@@ -63,7 +63,7 @@ export class Container {
     private registerScheduler() {
         this.container.register({
             scheduler: asClass(Scheduler).singleton(),
-            eventConfigs: asValue(eventConfigs),
+            schedulerConfig: asValue(schedulerConfig),
         });
         return this;
     }

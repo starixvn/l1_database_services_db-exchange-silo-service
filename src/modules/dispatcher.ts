@@ -1,11 +1,11 @@
 import type { BaseLogger } from "@ldb/base-logger";
-import { EventsDescription, GenericListener, TypedEventEmitter } from "@ldb/types";
+import { TypedEventEmitter, type EventsDescription, type GenericListener } from "@ldb/types";
 
 export class Dispatcher<
     EventDescs extends EventsDescription,
     PubEvent extends string,
     PubEventDesc extends Record<PubEvent, GenericListener>,
-    Publisher extends TypedEventEmitter<PubEventDesc> = TypedEventEmitter<PubEventDesc>
+    Publisher extends TypedEventEmitter<PubEventDesc> = TypedEventEmitter<PubEventDesc>,
 > extends TypedEventEmitter<EventDescs> {
     private readonly publishers: Set<Publisher> = new Set();
 

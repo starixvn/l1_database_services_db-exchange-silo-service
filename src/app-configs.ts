@@ -3,7 +3,7 @@ import type { NodeOptions, SentryOptions } from "@ldb/sentry-logger";
 import type { SkynexOptions } from "@ldb/skynex-logger";
 import type { config } from "mssql";
 import { name, version } from "./metadata.js";
-import type { SchedulerConfigs } from "./types/scheduler.js";
+import type { SchedulerConfig } from "./types/scheduler.js";
 
 export const environment = "DEV" as const;
 export const healthcheckPort = 5000 as const;
@@ -51,7 +51,6 @@ export const database = {
     } as const satisfies config,
 } as const;
 
-export const eventConfigs = {
-    // SYNC: [6 * 3_600_000, 0],
+export const schedulerConfig = {
     SYNC: [60_000, 0],
-} as const satisfies SchedulerConfigs;
+} as const satisfies SchedulerConfig;

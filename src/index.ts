@@ -1,4 +1,3 @@
-/* eslint-disable new-cap */
 import { MongoClient, MONGOCLIENT_DEFAULT_OPTIONS } from "@ldb/mongo";
 import mssql from "mssql";
 import { database } from "./app-configs.js";
