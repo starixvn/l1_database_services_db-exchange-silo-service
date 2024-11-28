@@ -1,6 +1,5 @@
-import type { SchedulerEventDescriptions, TimerConfig, Scheduler as UpstreamScheduler } from "@ldb/scheduler";
+import type { SchedulerEventDescription, TimerConfig } from "@ldb/scheduler";
 
-export type SchedulerKey = "SYNC";
-export type SchedulerConfig = Record<SchedulerKey, TimerConfig>;
-export type SchedulerEvents = SchedulerEventDescriptions<SchedulerKey>;
-export type Scheduler = UpstreamScheduler<SchedulerKey>;
+export type SchedulerKeys = "SYNC";
+export type SchedulerConfigs = Record<SchedulerKeys, TimerConfig>;
+export type SchedulerEvents = SchedulerEventDescription<SchedulerConfigs>;
