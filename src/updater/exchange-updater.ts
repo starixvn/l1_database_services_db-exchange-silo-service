@@ -1,10 +1,11 @@
 /* eslint-disable new-cap */
-import type { BaseLogger } from "@ldb/base-logger";
+import type { BaseLogger } from "@ldb/logger";
 import type { AnyBulkWriteOperation, Collection } from "@ldb/mongo";
+import type { Scheduler } from "@ldb/scheduler";
+import { Subscriber } from "@ldb/utils";
 import mssql from "mssql";
 import type { ExchangeCodes, ExchangeConfigSchema, ExchangeSilo } from "../types/exchanges.js";
-import type { Scheduler, SchedulerEvents, SchedulerKey } from "../types/scheduler.js";
-import { Subscriber } from "./subscriber.js";
+import type { SchedulerEvents, SchedulerKeys } from "../types/scheduler.js";
 
 const convertExchangeDataToBulkWrite = ({ time, code, USD, VND }: ExchangeSilo): AnyBulkWriteOperation => ({
     updateOne: {
@@ -14,7 +15,7 @@ const convertExchangeDataToBulkWrite = ({ time, code, USD, VND }: ExchangeSilo):
     },
 });
 
-export class ExchangeUpdater extends Subscriber<SchedulerKey, SchedulerEvents> {
+export class ExchangeUpdater extends Subscriber<SchedulerEvents> {
     startTime: Date | null = null;
 
     constructor(
@@ -80,11 +81,11 @@ export class ExchangeUpdater extends Subscriber<SchedulerKey, SchedulerEvents> {
         this.logger.logDebug({ title: `${this.className}.updateExchange`, message: `#=${matchedCount}  I+${upsertedCount}  M=${modifiedCount}` });
     }
 
-    subscribe(publisher: Scheduler) {
-        return super.subscribe(publisher, this.execute, "SYNC");
+    subscribe(publisher: Scheduler<SchedulerKeys>) {
+        return super.subscribe(publisher, "SYNC", this.execute);
     }
 
-    unsubscribe(publisher: Scheduler) {
-        return super.unsubscribe(publisher, this.execute, "SYNC");
+    unsubscribe(publisher: Scheduler<SchedulerKeys>) {
+        return super.unsubscribe(publisher, "SYNC", this.execute);
     }
 }

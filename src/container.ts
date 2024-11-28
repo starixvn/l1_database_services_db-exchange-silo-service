@@ -1,70 +1,21 @@
-import { Logger } from "@ldb/logger";
+import { asClass, asValue, BaseContainer } from "@ldb/base-container";
 import type { ChangeStreamNameSpace, MongoClient } from "@ldb/mongo";
-import { Scheduler } from "@ldb/scheduler";
-import { SentryLogger } from "@ldb/sentry-logger";
-import { SkynexLogger } from "@ldb/skynex-logger";
-import { TerminalLogger } from "@ldb/terminal-logger";
-import { asClass, asValue, createContainer, InjectionMode, type AwilixContainer, type ResolveOptions } from "awilix";
 import mssql from "mssql";
-import {
-    environment,
-    healthcheckPort,
-    schedulerConfig,
-    sentryNodeOptions,
-    sentryOptions,
-    sentrySeverityLevel,
-    skynexOptions,
-    skynexSeverityLevel,
-    terminalSeverityLevel,
-} from "./app-configs.js";
+import { healthcheckPort, lumiLoggerConfig, schedulerConfig } from "./app-configs.js";
 import { App } from "./app.js";
-import { HealthcheckServer } from "./healthcheck/server.js";
-import { ExchangeUpdater } from "./modules/exchange-updater.js";
+import { metadata } from "./metadata.js";
 import { namespaces, storedProcedures } from "./namespaces.js";
+import { ExchangeUpdater } from "./updater/exchange-updater.js";
 
 const namespaceToCollection = (mongoClient: MongoClient, { db, coll }: ChangeStreamNameSpace) => mongoClient.db(db).collection(coll);
 
-export class Container {
-    private readonly container: AwilixContainer;
-
+export class Container extends BaseContainer {
     constructor() {
-        this.container = createContainer({ injectionMode: InjectionMode.CLASSIC });
+        super();
     }
 
     register() {
-        this.registerLoggers().registerScheduler().registerClasses().registerHealthcheck();
-        return this;
-    }
-
-    private registerLoggers() {
-        this.container.register({
-            terminalLogger: asClass(TerminalLogger).singleton(),
-            terminalSeverityLevel: asValue(terminalSeverityLevel),
-        });
-        this.container.register({
-            skynexLogger: asClass(SkynexLogger).singleton(),
-            skynexOptions: asValue(skynexOptions),
-            skynexSeverityLevel: asValue(skynexSeverityLevel),
-        });
-        this.container.register({
-            sentryLogger: asClass(SentryLogger).singleton(),
-            sentryNodeOptions: asValue(sentryNodeOptions),
-            sentryOptions: asValue(sentryOptions),
-            sentrySeverityLevel: asValue(sentrySeverityLevel),
-        });
-        this.container.register({
-            logger: asClass(Logger).singleton(),
-            otherLoggers: asValue(null),
-            environment: asValue(environment),
-        });
-        return this;
-    }
-
-    private registerScheduler() {
-        this.container.register({
-            scheduler: asClass(Scheduler).singleton(),
-            schedulerConfig: asValue(schedulerConfig),
-        });
+        this.registerLogger(lumiLoggerConfig).registerHealthcheck(metadata, healthcheckPort).registerScheduler(schedulerConfig).registerClasses();
         return this;
     }
 
@@ -72,14 +23,6 @@ export class Container {
         this.container.register({
             app: asClass(App).singleton(),
             exchangeUpdater: asClass(ExchangeUpdater).singleton(),
-        });
-        return this;
-    }
-
-    private registerHealthcheck() {
-        this.container.register({
-            healthcheckServer: asClass(HealthcheckServer).singleton(),
-            healthcheckPort: asValue(healthcheckPort),
         });
         return this;
     }
@@ -99,9 +42,5 @@ export class Container {
         });
 
         return this;
-    }
-
-    resolve<N extends string>(name: N, resolveOptions?: ResolveOptions) {
-        return this.container.resolve(name, resolveOptions);
     }
 }
