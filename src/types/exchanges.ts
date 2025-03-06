@@ -1,3 +1,5 @@
+import type { ObjectId } from "@ldb/mongo";
+
 export type Code = string;
 
 export type ExchangeCodes = Code[];
@@ -10,6 +12,7 @@ export type ExchangeConfigSchema = {
 };
 
 export type ExchangeSilo = {
+    _id: ObjectId;
     time: Date;
     code: Code;
     USD: number;
