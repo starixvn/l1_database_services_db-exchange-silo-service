@@ -1,10 +1,10 @@
 import { asClass, asValue, BaseContainer } from "@ldb/base-container";
 import type { ChangeStreamNameSpace, MongoClient } from "@ldb/mongo";
 import mssql from "mssql";
-import { healthcheckPort, lumiLoggerConfig, schedulerConfig } from "./app-configs.js";
+import { healthcheckPort, lumiLoggerConfig, namespaces, schedulerConfig } from "./app-configs.js";
 import { App } from "./app.js";
 import { metadata } from "./metadata.js";
-import { namespaces, storedProcedures } from "./namespaces.js";
+import { storedProcedures } from "./namespaces.js";
 import { ExchangeUpdater } from "./updater/exchange-updater.js";
 
 const namespaceToCollection = (mongoClient: MongoClient, { db, coll }: ChangeStreamNameSpace) => mongoClient.db(db).collection(coll);

@@ -1,4 +1,5 @@
 import type { LumiLoggerConfig } from "@ldb/logger";
+import type { ChangeStreamNameSpace } from "@ldb/mongo";
 import type { config } from "mssql";
 import { name, version } from "./metadata.js";
 import type { SchedulerConfigs } from "./types/scheduler.js";
@@ -50,3 +51,8 @@ export const database = {
 export const schedulerConfig = {
     SYNC: [60_000, 0],
 } as const satisfies SchedulerConfigs;
+
+export const namespaces = {
+    exchangeConfig: { db: "minigame", coll: "global_configs" },
+    exchangeSilos: { db: "minigame", coll: "exchange_silos" },
+} as const satisfies Record<string, ChangeStreamNameSpace>;
