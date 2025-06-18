@@ -1,4 +1,5 @@
 /** @typedef {import("@ldb/logger").LumiLoggerConfig} LumiLoggerConfig */
+/** @typedef {import("@ldb/mongo").ChangeStreamNameSpace} ChangeStreamNameSpace */
 
 import { name, version } from "./metadata.js";
 
@@ -8,7 +9,7 @@ export const healthcheckPort = 5000;
 /** @type {LumiLoggerConfig} */
 export const lumiLoggerConfig = {
     sentryNodeOptions: {
-        dsn: "https://be2c83ae1b01424ab32f27411f22f8c5@sentry.lumigame.com/77",
+        dsn: "https://d6f025dd4f7c1eb4de459a6257f494d1@sentry-k8s.lumigame.com/22",
         environment,
         initialScope: {
             tags: { service: name },
@@ -18,7 +19,7 @@ export const lumiLoggerConfig = {
     skynexOptions: {
         conversationIds: {
             telegram: -1001604444158,
-            teams: "19:8d4e742134134c3893e78891257d6c3c@thread.tacv2",
+            slack: "B08GPPK88MS:T08ACMHMMFS:C091FAL49UG",
         },
     },
     environment,
@@ -48,4 +49,10 @@ export const database = {
 
 export const schedulerConfig = {
     SYNC: [3_600_000, 60_000],
+};
+
+/** @type {Record<string, ChangeStreamNameSpace>} */
+export const namespaces = {
+    exchangeConfig: { db: "minigame", coll: "global_configs" },
+    exchangeSilos: { db: "minigame", coll: "exchange_silos" },
 };
